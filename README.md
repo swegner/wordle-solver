@@ -1,2 +1,3 @@
-# wordle-solver
-Toying around with a solver for wordle
+Wordle Solver
+
+.. if I actually get around to building anything.
