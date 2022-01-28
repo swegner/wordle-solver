@@ -1,3 +1,6 @@
 {
-    "python.pythonPath": ".virtualenv/bin/python"
+    "python.pythonPath": ".virtualenv/bin/python",
+    "python.analysis.extraPaths": [
+        "./bazel-wordle-solver/external/my_deps/pypi__absl_py"
+    ]
 }
