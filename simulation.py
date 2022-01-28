@@ -29,9 +29,6 @@ def _simulate_internal(
 
   logging.debug('Simulating Wordle game for solution: %s', solution_word)
   for guess_num in range(1, solver_lib.NUM_GUESSES+1):
-    # DO NOT SUBMIT: Move this internal
-    # DO NOT SUBMIT: Remove or refactor
-    # guess = ('lares' if guess_num == 1 else state.calculate_best_guess())
     guess = state.calculate_best_guess()
     outcome = solver_lib.evaluate_guess(guess=guess, solution=solution_word)
     logging.debug('Guess #%d: %s; Outcome: %s', guess_num, guess, outcome)

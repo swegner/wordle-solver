@@ -24,7 +24,7 @@ class GameStateTests(absltest.TestCase):
           'Found solution for `%s` in %d guesses', 1, solution_word, num_guesses)
         histogram[num_guesses] += 1
 
-      # DO NOT SUBMIT: Do something other than fail?
+      # FIXME: Do something other than fail?
       self.fail(f'Benchmark results: {histogram}')
 
 
