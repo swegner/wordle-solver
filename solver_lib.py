@@ -119,12 +119,6 @@ class GameState:
   def potential_solutions(self) -> List[str]:
     return self._potential_solutions
 
-  @property
-  def solution(self) -> Optional[str]:
-    return (
-        self._potential_solutions[0] if len(self._potential_solutions) == 1 
-        else None)
-
   def __str__(self) -> str:
     return '\n'.join([
         f'Remaining words: {len(self._potential_solutions)}, ({self._potential_solutions[:5]})',
@@ -138,6 +132,9 @@ class GameState:
   def calculate_best_guess(self) -> str:
     if self._is_initial_state and USE_CACHE.value:
       return BEST_FIRST_GUESS
+
+    if len(self._potential_solutions) == 1:
+      return self._potential_solutions[0]
 
     best_word = ''
     max_gain = -1

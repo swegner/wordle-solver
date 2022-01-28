@@ -50,7 +50,10 @@ class RegressionTests(absltest.TestCase):
     possible_solutions = solver_lib.load_words_file(solver_lib.SOLUTIONS_FILE)
 
     with self.assertNotRaises():
-      simulation.simulate_game(dictionary, possible_solutions, solution_word='abate')
+      num_guesses = simulation.simulate_game(
+        dictionary, possible_solutions, solution_word='abate')
+
+    self.assertGreater(num_guesses, 0)
 
 
 if __name__ == '__main__':

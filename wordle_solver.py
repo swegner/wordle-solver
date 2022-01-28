@@ -18,10 +18,6 @@ def play_wordle(dictionary: List[str], possible_solutions: List[str]) -> None:
   state = _GameState(dictionary, possible_solutions=possible_solutions)
 
   for _ in range(solver_lib.NUM_GUESSES):
-    if state.solution:
-      print(f'Found solution: {state.solution.upper()}')
-      return
-
     suggested_guess = state.calculate_best_guess()
     outcome = prompt_guess(suggested_guess)
     if outcome.is_win:
