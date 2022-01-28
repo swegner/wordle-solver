@@ -62,8 +62,8 @@ class GuessOutcome:
 
 @dataclasses.dataclass
 class FrequencyPredicate:
-  max_occurrences: Optional[int] = None
   min_occurrences: Optional[int] = None
+  max_occurrences: Optional[int] = None
 
   def __str__(self) -> str:
     return '[{min},{max}]'.format(
@@ -166,9 +166,9 @@ class GameState:
 
     for letter, letter_outcomes in info_by_letter.items():
       logging.debug('Guess outcomes for letter %s: %s', letter, letter_outcomes)
+      has_absent = False
+      non_absent_count = 0
       for i, outcome in letter_outcomes:
-        has_absent = False
-        non_absent_count = 0
         if outcome == LetterOutcome.CORRECT:
           assert letter in self._possible_letters[i], (
             'Letter {letter} not in set of possible letters for position {i}: {possible_letters}'.format(
