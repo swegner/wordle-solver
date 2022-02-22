@@ -99,6 +99,12 @@ class FrequencyPredicate:
 LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 
 
+@dataclasses.dataclass
+class SuggestedGuess:
+  word: str
+  information_gain: float
+
+
 # Refactor this into a 'algorithm' base class + implementation?
 @dataclasses.dataclass
 class GameState:
@@ -129,6 +135,7 @@ class GameState:
         f'  {i}: {letters}' for i, letters in enumerate(self._possible_letters)
     ])
 
+  # FIXME: Refactor to return a `SuggestedGuess`
   def calculate_best_guess(self) -> str:
     if self._is_initial_state and USE_CACHE.value:
       return BEST_FIRST_GUESS
@@ -150,6 +157,17 @@ class GameState:
                      max_gain)
     assert best_word
     return best_word
+
+  def calculate_guesses(self) -> List[SuggestedGuess]:
+    guesses: List[SuggestedGuess] = []
+    for i, word in enumerate(self._dictionary):
+      logging.log_every_n_seconds(
+          logging.INFO, 'Calcuating information gain from %dth word: %s', 1, i,
+          word)
+      guesses.append(SuggestedGuess(
+        word, 
+        calculate_information_gain(word, self._potential_solutions)))
+    return guesses
 
   def update(self, guess: GuessOutcome) -> None:
     assert isinstance(guess, GuessOutcome), type(guess)

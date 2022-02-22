@@ -45,7 +45,15 @@ py_test(
 py_binary(
     name = "wordle_solver",
     srcs = ["wordle_solver.py"],
-    data = ["dictionary.txt"],
+    deps = [
+	  ":solver_lib",
+	  requirement("absl-py"),
+    ],
+)
+
+py_binary(
+    name = "starting_words",
+    srcs = ["starting_words.py"],
     deps = [
 	  ":solver_lib",
 	  requirement("absl-py"),
