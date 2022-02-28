@@ -28,23 +28,31 @@ def play_wordle(dictionary: List[str], possible_solutions: List[str]) -> None:
 
 
 def prompt_guess(guess: str) -> _GuessOutcome:
-  print(f'Enter guess: `{guess.upper()}`')
+  assert all(c.isupper() for c in guess), guess
+  print(f'Enter guess: `{guess}`')
   while True:
     outcome_str = input(
-        textwrap.dedent("""
-      Enter the outcome, encoding each letter according to its color:
+        textwrap.dedent(f"""
+      Enter the outcome for guess `{guess}`, encoding each letter according to its color:
         B = black
         Y = yellow
         G = green
+
+      If you used a different guess than `{guess}`, enter it instead.
       """))
-    try:
+    if all((c in 'BYG' for c in outcome_str)):
       return parse_outcome(guess, outcome_str)
-    except ValueError as e:
-      print(f'Invalid outcome string `{outcome_str}: {e}')
+
+    # Something other than an outcome was entered.. should be a different guess.
+    if len(outcome_str) == 5:
+      guess = outcome_str
+      continue
+
+    print(f'Invalid outcome string `{outcome_str}')
 
 
 def parse_outcome(word: str, outcome_str: str) -> _GuessOutcome:
-  logging.debug('outcome_str: %s', outcome_str)
+  logging.debug('outcome_str for %s: %s', word, outcome_str)
   return _GuessOutcome([(c, _LetterOutcome(o)) for c, o in zip(word, outcome_str)])
 
 

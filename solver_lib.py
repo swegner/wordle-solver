@@ -16,7 +16,7 @@ WORD_LENGTH = 5
 NUM_GUESSES = 6
 
 
-BEST_FIRST_GUESS = 'roate'  # cached from previous run
+BEST_FIRST_GUESS = 'ROATE'  # cached from previous run
 USE_CACHE = flags.DEFINE_bool(
     'use_cache', True,
     'Whether to use the best guess cached from previous runs.')
@@ -28,7 +28,7 @@ def load_words_file(path: str) -> List[str]:
     for line in words_file:
       word = line.strip()
       assert len(word) == WORD_LENGTH, word
-      word_bank.append(word)
+      word_bank.append(word.upper())
     logging.info('Loaded %s with %d words.', path, len(word_bank))
     return word_bank
 
@@ -96,7 +96,7 @@ class FrequencyPredicate:
     return True
 
 
-LETTERS = 'abcdefghijklmnopqrstuvwxyz'
+LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 @dataclasses.dataclass
@@ -117,7 +117,7 @@ class GameState:
     self._word_length = len(dictionary[0])
     self._letter_frequencies = {l: FrequencyPredicate() for l in LETTERS}
     self._possible_letters = [
-        'abcdefghijklmnopqrstuvwxyz' for _ in range(self._word_length)
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ' for _ in range(self._word_length)
     ]
     self._is_initial_state = True
 
