@@ -133,8 +133,8 @@ dmypy.json
 *.swp
 
 # Bazel
-bazel-bin
-bazel-out
-bazel-testlogs
-bazel-wordle-solver
+python/bazel-bin
+python/bazel-out
+python/bazel-testlogs
+python/bazel-wordle-solver
 

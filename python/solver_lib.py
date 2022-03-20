@@ -233,12 +233,12 @@ def calculate_information_gain(word: str, potential_solutions: List[str]) -> flo
     outcome = evaluate_guess(guess=word, solution=potential_solution)
     outcomes[str(outcome)] += 1
 
-  num_possibilities = len(potential_solutions)
+  total_potential_solutions = len(potential_solutions)
   expected_information_gain = 0.0
   # logging.debug('Word %s has %d outcomes: %s', word, len(outcomes), outcomes)
   for num_outcome_solutions in outcomes.values():
-    outcome_probability = float(num_outcome_solutions) / num_possibilities
-    outcome_information_gain = ((num_possibilities - num_outcome_solutions) *
+    outcome_probability = float(num_outcome_solutions) / total_potential_solutions
+    outcome_information_gain = ((total_potential_solutions - num_outcome_solutions) *
                                 outcome_probability)
     expected_information_gain += outcome_information_gain
 
