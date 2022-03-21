@@ -135,6 +135,7 @@ dmypy.json
 # Bazel
 python/bazel-bin
 python/bazel-out
+python/bazel-python
 python/bazel-testlogs
 python/bazel-wordle-solver
 
